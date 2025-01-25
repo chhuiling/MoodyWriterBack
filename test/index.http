@@ -1,0 +1,41 @@
+###
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "John",
+  "surname": "Doe",
+  "email": "john@gmail.com",
+  "password": "123456",
+  "birthdate": "1990-01-01",
+  "gender": "Nonbinaryx"
+  }
+
+
+###
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Angeliyo",
+  "surname": "XXX",
+  "email": "sex@gmail.com",
+  "password": "123456dsdsdsdsdsd",
+  "birthdate": "1999-01-01",
+  "gender": "Man"
+  }
+
+###
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "sex@gmail.com",
+  "password": "123456dsdsdsdsdsd"
+  }
+
+###
+DELETE http://localhost:3000/api/users/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk1MGZhNTI4YmEyM2JjZTFiYmI1NmYiLCJuYW1lIjoiQW5nZWxpeW8iLCJzdXJuYW1lIjoiWFhYIiwiZW1haWwiOiJzZXhAZ21haWwuY29tIiwiaWF0IjoxNzM3ODI5Mjg4LCJleHAiOjE3NjkzNjUyODh9.A6o8rZWYNOMwwa1zq-NhWX6mzP8qQlhUDkyz-xxg8So
+
