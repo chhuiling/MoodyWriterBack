@@ -34,4 +34,22 @@ const userLoginValidator = [
     (req, res, next) => validateResults(req, res, next)
 ]
 
-module.exports = { userRegisterValidator, userLoginValidator };
+const updateUserValidator =[
+    check("name")
+        .isString().withMessage("Name must be a string")
+        .optional(),
+    check("surname")
+        .isString().withMessage("Surname must be a string")
+        .optional(),
+    check("email")
+        .isEmail().withMessage("Email must be a valid email address")
+        .optional(),
+    check("password") 
+        .isString().withMessage("Password must be a string")
+        .optional(),
+    check("gender")
+        .optional(),
+        (req, res, next) => validateResults(req, res, next)
+]
+
+module.exports = { userRegisterValidator, userLoginValidator, updateUserValidator};

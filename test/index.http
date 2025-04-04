@@ -19,8 +19,8 @@ Content-Type: application/json
 {
   "name": "Angeliyo",
   "surname": "XXX",
-  "email": "sex@gmail.com",
-  "password": "123456dsdsdsdsdsd",
+  "email": "sexsiuehdui@gmail.com",
+  "password": "123456",
   "birthdate": "1999-01-01",
   "gender": "Man"
   }
@@ -39,3 +39,11 @@ DELETE http://localhost:3000/api/users/delete
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk1MGZhNTI4YmEyM2JjZTFiYmI1NmYiLCJuYW1lIjoiQW5nZWxpeW8iLCJzdXJuYW1lIjoiWFhYIiwiZW1haWwiOiJzZXhAZ21haWwuY29tIiwiaWF0IjoxNzM3ODI5Mjg4LCJleHAiOjE3NjkzNjUyODh9.A6o8rZWYNOMwwa1zq-NhWX6mzP8qQlhUDkyz-xxg8So
 
+###
+PUT http://localhost:3000/api/users/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3OGQ4OTk2N2E2MjQ4YTI2NDAxNWEiLCJuYW1lIjoiQW5nZWxpeW8iLCJzdXJuYW1lIjoiWFhYIiwiZW1haWwiOiJzZXhAZ21haWwuY29tIiwiaWF0IjoxNzM3OTkzNDQ1LCJleHAiOjE3Njk1Mjk0NDV9.emAFwVlnR6gCVbv4AKJ1mbJcwsulXzjhSv1R_4_4V3w
+
+{
+  "name": "Angeliyo0000xx",
+  "surname": "XXX"}

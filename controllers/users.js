@@ -60,5 +60,19 @@ const userDelete = async (req,res) => {
   }
 }
 
+const userUpdate = async (req,res) => {
+  try{
+    const id = req.user._id;
+    const validatedData = matchedData(req);
+    const user = await usersModel.findByIdAndUpdate(id, validatedData, {new: true});  
+    if(!user) return res.status(404).json({message: "User not found"})
+    return res.status(200).json(user)
+  }
+  catch(error){
+    console.error(error);
+    handleHttpError(res, error)
+  }
+}
 
-module.exports = { userRegister, userLogin, userDelete };
+
+module.exports = { userRegister, userLogin, userDelete, userUpdate };
