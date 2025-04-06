@@ -19,6 +19,10 @@ const userRegisterValidator = [
         .isString().withMessage("Password must be a string")
         .isLength({ min: 6 }).withMessage("Password must be at least 6 characters long")
         .isLength({ max: 20 }).withMessage("Password must be at most 20 characters long"),
+    check("birthdate")
+        .exists().withMessage("Birthdate is required"),
+    check("gender")
+        .exists().withMessage("Describe your gender"),
     (req, res, next) => validateResults(req, res, next) 
 ];
 

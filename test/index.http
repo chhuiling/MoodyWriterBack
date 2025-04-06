@@ -25,6 +25,23 @@ Content-Type: application/json
   "gender": "Man"
   }
 
+  
+
+###
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "hi",
+  "surname": "XXX",
+  "email": "xasaasassq@gmail.com",
+  "password": "123456",
+  "birthdate": "1999-01-01",
+  "gender": "Man"
+  }
+
+###
+
 ###
 POST http://localhost:3000/api/users/login
 Content-Type: application/json
