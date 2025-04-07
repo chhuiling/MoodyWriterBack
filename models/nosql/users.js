@@ -1,6 +1,6 @@
 // Imports
 const mongoose = require("mongoose")
-const mongooseDelete = require("mongoose-delete")
+//const mongooseDelete = require("mongoose-delete")
 
 // Create base schema for 'users' DB
 const UsersSchema = new mongoose.Schema(
@@ -32,7 +32,7 @@ const UsersSchema = new mongoose.Schema(
     }
 );
 
-UsersSchema.plugin(mongooseDelete, { overrideMethods: "all" });
+//UsersSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 // Exports ('users' schema of DB)
 module.exports = mongoose.model("users", UsersSchema);
