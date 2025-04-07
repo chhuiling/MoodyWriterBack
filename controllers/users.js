@@ -16,7 +16,7 @@ const userRegister = async (req, res) => {
 
     const data = {token: tokenSign(userData), user: userData};
     
-    return res.status(201).json(data); 
+    return res.send(data); 
   } catch (error) {
     console.error(error);
     handleHttpError(res, error);
@@ -37,7 +37,7 @@ const userLogin = async (req,res) => {
     
     const data = {token: tokenSign(user), user: user};
     console.log(data)
-    return res.status(200).json(data);
+    return res.send(data);
 
   }
   catch(error){
