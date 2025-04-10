@@ -54,12 +54,12 @@ POST http://localhost:3000/api/posts
 Content-Type: application/json
 
 {
-    "userId": 1,
-    "mood": "Sad",
-    "emotions": ["Sad again"],
+    "userId": 2,
+    "mood": "Neutral",
+    "emotions": ["Happy"],
     "sleepHours": "1-5",
     "sleepQuality": 65,
-    "energy": 50,
+    "energy": 80,
     "health": ["Sleep"],
     "hobbies": [],
     "food": [],
@@ -68,6 +68,6 @@ Content-Type: application/json
     "chores": ["Laundry"],
     "weather": [],
     "beauty": [],
-    "text": "I want to end it all",
+    "text": "Life good",
     "images": []
 }

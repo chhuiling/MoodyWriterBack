@@ -1,5 +1,5 @@
 // Define function
-const handleHttpError = (res, message, code = 403) => {
+const handleHttpError = (res, message, code = 500) => {
     res.status(code).send(message)
 };
 
