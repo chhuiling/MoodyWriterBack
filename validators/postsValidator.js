@@ -10,8 +10,8 @@ const postsValidator = [
     // Validación para mood
     check('mood')
         .optional() 
-        .isIn(["Very sad", "Sad", "Neutral", "Happy", "Very happy"])
-        .withMessage('El campo mood debe ser uno de: "Very sad", "Sad", "Neutral", "Happy", "Very happy"'),
+        .isIn(["Miserable", "Sad", "Neutral", "Happy", "Ecstatic"])
+        .withMessage('El campo mood debe ser uno de: "Miserable", "Sad", "Neutral", "Happy", "Ecstatic"'),
 
     // Validación para emotions
     check('emotions')

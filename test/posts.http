@@ -55,8 +55,8 @@ Content-Type: application/json
 
 {
     "userId": 2,
-    "mood": "Neutral",
-    "emotions": ["Happy"],
+    "mood": "Miserable",
+    "emotions": ["Guilty"],
     "sleepHours": "1-5",
     "sleepQuality": 65,
     "energy": 80,
@@ -68,6 +68,6 @@ Content-Type: application/json
     "chores": ["Laundry"],
     "weather": [],
     "beauty": [],
-    "text": "Life good",
+    "text": "Life bad",
     "images": []
 }
