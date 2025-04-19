@@ -62,6 +62,7 @@ const userDelete = async (req,res) => {
 
 const userUpdate = async (req,res) => {
   try{
+
     const id = req.user._id;
     const validatedData = matchedData(req);
     const user = await usersModel.findByIdAndUpdate(id, validatedData, {new: true});  
@@ -90,7 +91,7 @@ const googleSignIn = async(req,res) => {
         birthdate: birthday
       })
     }
-    
+
     user.password = undefined
     console.log(user)
     const data = {token: tokenSign(user), user: user}

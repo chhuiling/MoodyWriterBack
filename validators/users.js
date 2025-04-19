@@ -51,6 +51,8 @@ const updateUserValidator =[
     check("password") 
         .isString().withMessage("Password must be a string")
         .optional(),
+    check("birthdate")
+        .optional(),    
     check("gender")
         .optional(),
         (req, res, next) => validateResults(req, res, next)
