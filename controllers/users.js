@@ -62,6 +62,7 @@ const userDelete = async (req,res) => {
 
 const userUpdate = async (req,res) => {
   try{
+
     const id = req.user._id;
     const validatedData = matchedData(req);
     const user = await usersModel.findByIdAndUpdate(id, validatedData, {new: true});  
@@ -74,5 +75,44 @@ const userUpdate = async (req,res) => {
   }
 }
 
+const googleSignIn = async(req,res) => {
+  try{
+    const{email,givenName,familyName,gender,birthday} = req.body;
+    if(!email) return res.status(400).json({message: "Email is required"})
+    
+      let user = await usersModel.findOne({email});
 
-module.exports = { userRegister, userLogin, userDelete, userUpdate };
+    if(!user){
+      user = await usersModel.create({
+        email: email,
+        name: givenName,
+        surname: familyName,
+        gender: gender,
+        birthdate: birthday
+      })
+    }
+
+    user.password = undefined
+    console.log(user)
+    const data = {token: tokenSign(user), user: user}
+    res.status(200).json(data)
+
+  }
+  catch(error){
+    console.error(error);
+    handleHttpError(res, error)
+  }
+}
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await usersModel.find({}, { password: 0 });
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    handleHttpError(res, error);
+  }
+};
+
+
+module.exports = { userRegister, userLogin, userDelete, userUpdate, googleSignIn, getAllUsers};

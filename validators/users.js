@@ -3,9 +3,9 @@ const  validateResults  = require("../utils/handleValidators");
 
 const userRegisterValidator = [
     check("name")
-        .exists().withMessage("Username is required")
-        .notEmpty().withMessage("Username cannot be empty")
-        .isString().withMessage("Username must be a string"),
+        .exists().withMessage("name is required")
+        .notEmpty().withMessage("name cannot be empty")
+        .isString().withMessage("name must be a string"),
     check("surname")
         .isString().withMessage("Surname must be a string")
         .notEmpty().withMessage("Surname cannot be empty"),
@@ -51,6 +51,8 @@ const updateUserValidator =[
     check("password") 
         .isString().withMessage("Password must be a string")
         .optional(),
+    check("birthdate")
+        .optional(),    
     check("gender")
         .optional(),
         (req, res, next) => validateResults(req, res, next)

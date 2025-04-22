@@ -13,6 +13,10 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:3000/api/users/all
+
+
+###
 POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
@@ -24,6 +28,31 @@ Content-Type: application/json
   "birthdate": "1999-01-01",
   "gender": "Man"
   }
+###
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "noam",
+  "surname": "XXX",
+  "email": "noam@gmail.com",
+  "password": "123456",
+  "birthdate": "1999-01-01",
+  "gender": "Man"
+  }
+
+###
+POST http://localhost:3000/api/users/googleSignIn
+Content-Type: application/json
+
+{
+  "givenName": "xxxxx",
+  "familyName": "xxxx",
+  "email": "dsdsdsdkm@gmail.com",
+  "birthday": "1999-01-01",
+  "gender": "Man"
+  }
+
 
   
 
