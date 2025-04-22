@@ -4,8 +4,8 @@ const validateResults = require('../utils/handleValidators');
 const postsValidator = [
     // Validación para userId
     check('userId')
-        .exists().withMessage('El campo userId es requerido')
-        .isNumeric().withMessage('El campo userId debe ser un número'),
+        .exists().withMessage('El campo userId es requerido'),
+        //.isNumeric().withMessage('El campo userId debe ser un número'),
 
     // Validación para mood
     check('mood')
