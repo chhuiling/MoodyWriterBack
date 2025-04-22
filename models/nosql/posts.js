@@ -47,7 +47,7 @@ const PostsSchema = new mongoose.Schema(
             type: Array
         },
         weather: {
-            type: Array
+            type: String
         },
         beauty: {
             type: Array

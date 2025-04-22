@@ -56,7 +56,7 @@ const postsValidator = [
     // Validación para weather
     check('weather')
         .optional()
-        .isArray().withMessage('El campo weather debe ser un array'),
+        .isString().withMessage('El campo weather debe ser un string'),
 
     // Validación para beauty
     check('beauty')
