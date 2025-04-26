@@ -6,9 +6,8 @@ const mongoose = require("mongoose")
 const PostsSchema = new mongoose.Schema(
     {
         userId: {
-            // type: mongoose.Schema.Types.ObjectId,
-            // ref: 'usersModel',
-            type: Number,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'usersModel',
         },
         mood: {
             type: String,
@@ -48,7 +47,7 @@ const PostsSchema = new mongoose.Schema(
             type: Array
         },
         weather: {
-            type: Array
+            type: String
         },
         beauty: {
             type: Array

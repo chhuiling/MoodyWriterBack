@@ -8,8 +8,12 @@ Content-Type: application/json
   "email": "john@gmail.com",
   "password": "123456",
   "birthdate": "1990-01-01",
-  "gender": "Nonbinaryx"
+  "gender": "Other"
   }
+
+
+###
+GET http://localhost:3000/api/users/all
 
 
 ###
@@ -24,6 +28,31 @@ Content-Type: application/json
   "birthdate": "1999-01-01",
   "gender": "Man"
   }
+###
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "noam",
+  "surname": "XXX",
+  "email": "noam@gmail.com",
+  "password": "123456",
+  "birthdate": "1999-01-01",
+  "gender": "Man"
+  }
+
+###
+POST http://localhost:3000/api/users/googleSignIn
+Content-Type: application/json
+
+{
+  "givenName": "xxxxx",
+  "familyName": "xxxx",
+  "email": "dsdsdsdkm@gmail.com",
+  "birthday": "1999-01-01",
+  "gender": "Man"
+  }
+
 
   
 
