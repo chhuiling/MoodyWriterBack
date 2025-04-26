@@ -7,6 +7,7 @@
  */
 
 const { postsModel } = require("../models");
+const posts = require("../models/nosql/posts");
 const uploadToPinata = require("../utils/handleUploadIPFS");
 
 const getAllPosts = async (req, res) => {
@@ -53,11 +54,13 @@ const createPost = async (req, res) => {
         const { body } = req;
         const files = req.files || [];
 
+        const postData = JSON.parse(body.post);
+
         const images = await uploadImagesToPinata(files);
 
-        body.images = images;
+        postData.images = images;
 
-        const post = await postsModel.create(body);
+        const post = await postsModel.create(postData);
         res.send(post);
     } catch (error) {
         console.log("Error creating post: ", error);
@@ -103,6 +106,23 @@ const uploadImagesToPinata = async (files)=> {
     }
 
     return uploadedImages;
+};
+
+const getMedia = async (posts, req, res) => {
+    const dayOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const valueByMood = {"Miserable": -2, "Sad": -1, "Neutral": 0, "Happy": 1, "Ecstatic": 2};
+    const media = {"Monday": 0, "Tuesday": 0, "Wednesday": 0, "Thursday": 0, "Friday": 0, "Saturday": 0, "Sunday": 0};
+    try {
+        for (let i = 0; i < posts.length; i++) {
+            const post = posts[i];
+            const mood = post.mood;
+            const day = dayOfTheWeek[new Date(post.createdAt).getUTCDay()];
+            media[dayOfTheWeek] += valueByMood[mood];
+        }
+        
+    } catch (error) {
+        
+    }
 };
 
 module.exports = {

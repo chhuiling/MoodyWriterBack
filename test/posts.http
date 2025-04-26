@@ -46,28 +46,50 @@ GET http://localhost:3000/api/posts
 
 ###
 
-GET http://localhost:3000/api/posts/677a98136433f7fe11a0e332
+GET http://localhost:3000/api/posts/67f7e1cef9821119bae6838a
 
 ###
 
 POST http://localhost:3000/api/posts
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="post"
 Content-Type: application/json
 
 {
-    "userId": 2,
-    "mood": "Miserable",
-    "emotions": ["Guilty"],
-    "sleepHours": "1-5",
-    "sleepQuality": 65,
-    "energy": 80,
+    "userId": 7,
+    "mood": "Sad",
+    "emotions": ["Sad again"],
+    "sleep": "Bad",
     "health": ["Sleep"],
     "hobbies": [],
     "food": [],
     "social": [],
     "productivity": [],
     "chores": ["Laundry"],
-    "weather": [],
+    "weather": ["Fog"],
     "beauty": [],
-    "text": "Life bad",
+    "text": "Please work",
     "images": []
 }
+
+--boundary
+Content-Disposition: form-data; name="files"; filename="landscape1.jpg"
+Content-Type: image/jpeg
+
+< ./landscape.jpg
+
+--boundary
+Content-Disposition: form-data; name="files"; filename="landscape2.jpg"
+Content-Type: image/jpeg
+
+< ./landscape.jpg
+
+--boundary
+Content-Disposition: form-data; name="files"; filename="boat.jpg"
+Content-Type: image/jpeg
+
+< ./boat.png
+
+--boundary--
