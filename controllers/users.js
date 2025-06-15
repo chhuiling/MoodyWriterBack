@@ -3,6 +3,8 @@ const { matchedData } = require("express-validator");
 const {tokenSign} = require("../utils/handleJwt");
 const {handleHttpError} = require("../utils/handleError");
 const  {usersModel}  = require("../models");
+const { sendEmail } = require("../utils/sendMail");
+const crypto = require("crypto");
 
 const userRegister = async (req, res) => {
   try {
@@ -114,5 +116,89 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const sendPasswordResetEmail = async (req, res) => {
+  try {
+    const userId = req.params.id
+    const user = await usersModel.findById(userId)
+    if (!user) {
+      return handleHttpError(res, {message: "User ID not found."}, 404)
+    }
 
-module.exports = { userRegister, userLogin, userDelete, userUpdate, googleSignIn, getAllUsers};
+    const passwordResetToken = crypto.randomBytes(32).toString("hex");
+
+    user.resetPasswordToken = passwordResetToken
+    user.resetPasswordTokenExpiration = Date.now() + 5 * 60 * 1000;
+    await user.save()
+
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}reset-password?token=${passwordResetToken}`;
+
+    sendEmail(user.email,
+                "Reset your password",
+                "Please click the following link to reset your password",
+                resetPasswordUrl,
+                "Reset Password"
+        );
+     res.send({ message: "Password reset email sent successfully. Please check your inbox." });
+
+  } catch (err) {
+    console.log(err)
+    return handleHttpError(res, { message: "Error sending password reset email" }, 500);
+  }
+}
+
+const checkPasswordResetToken = async (req, res) => {
+    try {
+        const { token } = req.query;
+        if (!token) {
+            return handleHttpError(res, { message: "Token is required to check password reset" }, 400);
+        }
+
+        const user = await usersModel.findOne({
+            resetPasswordToken: token,
+            resetPasswordTokenExpiration: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            console.warn("No valid user found with provided token");
+            return handleHttpError(res, { message: "Invalid or expired password reset token" }, 404);
+        }
+
+        res.send({ message: "Valid password reset token" });
+    } catch (error) {
+        console.error("Error checking password reset token:\n", error);
+        return handleHttpError(res, { message: "Error checking password reset token" }, 500);
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        if (!token || !newPassword) {
+            return handleHttpError(res, { message: "Token and new password are required to reset password" }, 400);
+        }
+
+        const user = await usersModel.findOne({
+            resetPasswordToken: token,
+            resetPasswordTokenExpiration: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            console.warn("No valid user found with provided token");
+            return handleHttpError(res, { message: "Invalid or expired password reset token" }, 404);
+        }   
+
+        user.password = await encrypt(newPassword);
+        user.resetPasswordToken = null;
+        user.resetPasswordTokenExpiration = null;
+        await user.save();
+
+        res.send({ message: "Password reset successfully. You can now log in with your new password." });
+    } catch (error) {
+        console.error("Error in resetting password:\n", error);
+        return handleHttpError(res, { message: "Error resetting password" }, 500);
+    }
+};
+
+
+module.exports = { userRegister, userLogin, userDelete, userUpdate, googleSignIn, getAllUsers, sendPasswordResetEmail, checkPasswordResetToken, resetPassword};
