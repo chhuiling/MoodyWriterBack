@@ -29,28 +29,35 @@ const PostsSchema = new mongoose.Schema(
             type:Number
         },
         health: {
-            type: Array
+            type: Array,
+            default: []
         },
         hobbies: {
-            type: Array
+            type: Array,
+            default: []
         },
         food: {
-            type: Array
+            type: Array,
+            default: []
         },
         social: {
-            type: Array
+            type: Array,
+            default: []
         },
         productivity: {
-            type: Array
+            type: Array,
+            default: []
         },
         chores: {
-            type: Array
+            type: Array,
+            default: []
         },
         weather: {
             type: String
         },
         beauty: {
-            type: Array
+            type: Array,
+            default: []
         },
         text: {
             type: String

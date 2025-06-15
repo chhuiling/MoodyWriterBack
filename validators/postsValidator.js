@@ -9,7 +9,7 @@ const postsValidator = [
 
     // Validación para mood
     check('mood')
-        .optional() 
+        .exists().withMessage('El campo mood es requerido')
         .isIn(["Miserable", "Sad", "Neutral", "Happy", "Ecstatic"])
         .withMessage('El campo mood debe ser uno de: "Miserable", "Sad", "Neutral", "Happy", "Ecstatic"'),
 
@@ -19,10 +19,17 @@ const postsValidator = [
         .isArray().withMessage('El campo emotions debe ser un array'),
 
     // Validación para sleep
-    check('sleep')
+    check('sleepHours')
         .optional()
-        .isString().withMessage('El campo sleep debe ser un String'),
+        .isString().withMessage('El campo sleepHours debe ser un String'),
 
+    check('sleepQuality')
+        .optional()
+        .isInt().withMessage('El campo sleepQuality debe de ser un numero'),
+
+    check('energy')
+        .optional()
+        .isInt().withMessage('El campo energy debe ser un numero'),
     // Validación para health
     check('health')
         .optional()
