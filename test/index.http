@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "John",
   "surname": "Doe",
-  "email": "john@gmail.com",
+  "email": "angel.liberto.ceb@immune.institute",
   "password": "123456",
   "birthdate": "1990-01-01",
   "gender": "Other"
@@ -61,10 +61,10 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-  "name": "hi",
-  "surname": "XXX",
-  "email": "xasaasassq@gmail.com",
-  "password": "123456",
+  "name": "Angel",
+  "surname": "Liberto",
+  "email": "angelitox@gmail.com",
+  "password": "12345678910*",
   "birthdate": "1999-01-01",
   "gender": "Man"
   }
@@ -76,8 +76,8 @@ POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
 {
-  "email": "sex@gmail.com",
-  "password": "123456dsdsdsdsdsd"
+  "email": "angelitox@gmail.com",
+  "password": "12345678910*"
   }
 
 ###
