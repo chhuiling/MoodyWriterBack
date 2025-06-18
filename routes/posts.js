@@ -9,7 +9,6 @@ router.get("/user-post/:id", getAllPosts);
 router.get("/:id", getOnePost);
 router.post("/", uploadMiddlewareMemory.array("files", 5), parsePostMiddleware, postsValidator, createPost);
 router.put("/:id", uploadMiddlewareMemory.array("files", 5), updatePost);
-router.delete("/:id");
 router.get("/get-weekdays-media/:id", getWeekdaysMoodMedia);
 router.get("/get-sleep-hours-media/:id", getSleepHoursMoodMedia);
 router.get("/get-top-5-activities/:id", getTop5Activities);

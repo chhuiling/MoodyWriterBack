@@ -154,7 +154,29 @@ const getPostsByMood = async (id, mood) => {
         console.log("error getting posts by mood:\n", error);
         throw new Error("GET_POSTS_BY_MOOD_ERROR");
     }
-}
+};
+
+const getPostsByMonth = async (id, month, year) => {
+    try {
+        const month = parseInt(month);
+        const year = parseInt(year);
+
+        if (!month || !year) {
+            console.warn("You must provide a month and year");
+            throw new Error("NO_MONTH_OR_YEAR_PROVIDED");
+        }
+
+        const monthStart = new Date(year, month - 1, 1);
+        const monthEnd = new Date(year, month, 1);
+
+        const posts = await postsModel.find({userId: id, createdAt: {$gte: monthStart, $lt: monthEnd}}).select("createdAt mood");
+
+        return posts;
+    } catch (error) {
+        console.log("Error in getting posts by month:\n", error);
+        throw new Error("GET_POSTS_BY_MONTH");
+    }
+};
 
 // Obtener la media del mood por cada día de la semana
 const getWeekdaysMoodMedia = async (req, res) => {
@@ -514,6 +536,43 @@ const getMostActiveDay = async (req, res) => {
     }
 };
 
+const getEnergyAndSleepQuality = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const posts = await getRecentPosts(id);
+
+        const result = {"energy": [], "sleep": []};
+
+        posts.forEach(post => {
+            const postEnergy = post.energy || 0;
+            const postSleepQuality = post.sleepQuality || 0;
+            
+            result.energy.push(postEnergy);
+            result.sleep.push(postSleepQuality)
+        });
+
+        res.send(result);
+    } catch (error) {
+        console.log("Error in getting energy and sleep quality:\n", error);
+        handleHttpError(res, { message: "Error in getting energy and sleep quality" }, 500);
+    }
+};
+
+const getMonthInformation = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const month = req.query.month;
+        const year = req.query.year;
+
+        const posts = await getPostsByMonth(id, month, year);
+        
+        res.send(posts);
+    } catch (error) {
+        console.log("Error getting month information:\n", error);
+        handleHttpError(res, { message: "Error in getting month information" }, 500);
+    }
+};
+
 module.exports = {
     getAllPosts,
     getOnePost,
@@ -524,4 +583,4 @@ module.exports = {
     getTop5Activities,
     getBestActivity,
     getMostActiveDay
-}
+};
