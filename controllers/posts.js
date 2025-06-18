@@ -582,5 +582,7 @@ module.exports = {
     getSleepHoursMoodMedia,
     getTop5Activities,
     getBestActivity,
-    getMostActiveDay
+    getMostActiveDay,
+    getEnergyAndSleepQuality,
+    getMonthInformation
 };
