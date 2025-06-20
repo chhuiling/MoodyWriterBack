@@ -65,7 +65,7 @@ const createPost = async (req, res) => {
         res.send(post);
     } catch (error) {
         console.log("Error creating post: ", error);
-        res.status(500).send("CREATE_POST_ERROR");
+        res.status(500).send("CREATE_POST_ERROR", error);
     }
 };
 

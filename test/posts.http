@@ -93,3 +93,11 @@ Content-Type: image/jpeg
 < ./boat.png
 
 --boundary--
+
+
+###
+GET https://abundant-laural-immune-angelceb-2b2d3c5a.koyeb.app/api/posts/user-post/67f434753b4bc9f51c66047e
+
+###
+GET http://localhost:3000/api/posts/get-top-5-activities/67f434753b4bc9f51c66047e
+
