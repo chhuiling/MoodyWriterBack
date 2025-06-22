@@ -76,11 +76,13 @@ const updatePost = async (req, res) => {
         const { body } = req;
         const files = req.files || [];
 
+        const postData = JSON.parse(body.post);
+
         const newImages = await uploadImagesToPinata(files);
 
-        body.images = newImages;
+        postData.images = newImages;
 
-        const postActualizado = await postsModel.findOneAndUpdate({_id: id}, body, {new: true});
+        const postActualizado = await postsModel.findOneAndUpdate({_id: id}, postData, {new: true});
         if (!postActualizado) {
             res.status(404).send("El post a actualizar no existe.");
             return;
