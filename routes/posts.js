@@ -219,10 +219,80 @@ router.get("/get-best-activity/:id", getBestActivity);
  *         description: Most active day
  */
 router.get("/get-most-active-day/:id", getMostActiveDay);
-router.get("/get-best-activity/:id", getBestActivity);
-router.get("/get-most-active-day/:id", getMostActiveDay);
+
+/**
+ * @swagger
+ * /posts/get-energy-and-sleep-information/{id}:
+ *   get:
+ *     summary: Get arrays of energy and sleep quality for the last 30 days
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: Arrays of energy and sleep quality
+ */
 router.get("/get-energy-and-sleep-information/:id", getEnergyAndSleepQuality);
+
+/**
+ * @swagger
+ * /posts/get-month-information/{id}:
+ *   get:
+ *     summary: Get posts for a user for a specific month and year
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User ID
+ *       - in: query
+ *         name: month
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Month (1-12)
+ *       - in: query
+ *         name: year
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Year (e.g. 2024)
+ *     responses:
+ *       200:
+ *         description: Posts for the specified month and year
+ */
 router.get("/get-month-information/:id", getMonthInformation);
+
+/**
+ * @swagger
+ * /posts/get-activities-preferences/{id}/{mood}:
+ *   get:
+ *     summary: Get activity preferences by mood for a user
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User ID
+ *       - in: path
+ *         name: mood
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Mood (or "mean" for all moods)
+ *     responses:
+ *       200:
+ *         description: Activity preferences by mood
+ */
 router.get("/get-activities-preferences/:id/:mood", getActivitiesPreferencesByMood);
 
 module.exports = router;
