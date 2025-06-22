@@ -78,7 +78,7 @@ const updatePost = async (req, res) => {
 
         const newImages = await uploadImagesToPinata(files);
 
-        body.images = [...body.images, ...newImages];
+        body.images = newImages;
 
         const postActualizado = await postsModel.findOneAndUpdate({_id: id}, body, {new: true});
         if (!postActualizado) {
@@ -88,7 +88,7 @@ const updatePost = async (req, res) => {
         res.send(postActualizado);
     } catch (error) {
         console.log("Error updating post: ", error);
-        res.status(500).send("UPDATE_POST_ERROR");
+        res.status(500).send("UPDATE_POST_ERROR",error);
     }
 };
 

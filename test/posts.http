@@ -58,7 +58,7 @@ Content-Disposition: form-data; name="post"
 Content-Type: application/json
 
 {
-    "userId": 7,
+    "userId": "67f434753b4bc9f51c66047e",
     "mood": "Sad",
     "emotions": ["Sad again"],
     "sleep": "Bad",
@@ -68,7 +68,7 @@ Content-Type: application/json
     "social": [],
     "productivity": [],
     "chores": ["Laundry"],
-    "weather": ["Fog"],
+    "weather": "Fog",
     "beauty": [],
     "text": "Please work",
     "images": []
