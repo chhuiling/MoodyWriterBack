@@ -156,10 +156,10 @@ const getPostsByMood = async (id, mood) => {
     }
 };
 
-const getPostsByMonth = async (id, month, year) => {
+const getPostsByMonth = async (id, monthQuery, yearQuery) => {
     try {
-        const month = parseInt(month);
-        const year = parseInt(year);
+        const month = parseInt(monthQuery);
+        const year = parseInt(yearQuery);
 
         if (!month || !year) {
             console.warn("You must provide a month and year");
@@ -573,6 +573,62 @@ const getMonthInformation = async (req, res) => {
     }
 };
 
+const getActivitiesPreferencesByMood = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const mood = req.params.mood;
+
+        let posts;
+
+        if (mood !== "mean") {
+            posts = await getPostsByMood(id, mood);
+        } else {
+            posts = await getPosts(id);
+        }
+
+        const activityCategories = [
+            "health",
+            "hobbies",
+            "food",
+            "social",
+            "productivity",
+            "chores",
+            "beauty"
+        ];
+
+        const activitiesCount = {};
+
+        activityCategories.forEach(category => {
+            activitiesCount[category] = 0;
+        });
+
+        activitiesCount["total"] = 0;
+
+        posts.forEach(post => {
+            activityCategories.forEach(category => {
+                const activityCategoryNumber = post[category].length;
+                activitiesCount[category] += activityCategoryNumber;
+                activitiesCount["total"] += activityCategoryNumber;
+            });
+        });
+
+        Object.keys(activitiesCount).forEach(category => {
+            if (category !== "total") {
+                const result = (activitiesCount[category] / activitiesCount["total"]) * 10;
+                const parsedResult = Math.min(Math.floor(result), 10);
+                activitiesCount[category] = parsedResult;
+            }
+        });
+
+        delete activitiesCount["total"];
+
+        res.send(activitiesCount);
+    } catch (error) {
+        console.log("Error in getting activities preferences by mood:\n", error);
+        handleHttpError(res, { message: "Error in getting activities preferences by mood" }, 500);
+    }
+};
+
 module.exports = {
     getAllPosts,
     getOnePost,
@@ -584,5 +640,6 @@ module.exports = {
     getBestActivity,
     getMostActiveDay,
     getEnergyAndSleepQuality,
-    getMonthInformation
+    getMonthInformation,
+    getActivitiesPreferencesByMood
 };
