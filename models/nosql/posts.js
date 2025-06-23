@@ -53,7 +53,9 @@ const PostsSchema = new mongoose.Schema(
             default: []
         },
         weather: {
-            type: String
+            type: String,
+            enum: ["Clear sky", "Cloudy", "Thunderstorm", "Drizzle", "Rain", "Snow", "Foggy or hazy", "Unknown"],
+            default: "Unknown"
         },
         beauty: {
             type: Array,

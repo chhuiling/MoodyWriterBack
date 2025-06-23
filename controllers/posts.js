@@ -339,6 +339,57 @@ const getSleepHoursMoodMedia = async (req, res) => {
     }
 };
 
+const getWeatherMoodMedia = async (req, res) => {
+    
+    const valueByMood = {"Miserable": -2, "Sad": -1, "Neutral": 0, "Happy": 1, "Ecstatic": 2};
+    
+    const media = {"Clear sky": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Cloudy": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Thunderstorm": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Drizzle": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Rain": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Snow": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}, 
+                    "Foggy or hazy": {"totalMood": 0, "totalDays": 0, "moodMedia": 0},
+                    "Unknown": {"totalMood": 0, "totalDays": 0, "moodMedia": 0}
+                };
+
+    try {
+        const id = req.params.id;
+        const posts = await getPosts(id);
+
+        posts.forEach(post => {
+            const mood = post.mood;
+            const weather = post.weather;
+
+            media[weather].totalMood += valueByMood[mood];
+            media[weather].totalDays += 1;
+        });
+
+        for (const weather in media) {
+            const { totalMood, totalDays } = media[weather];
+
+            if (totalDays === 0) {
+                media[weather].moodMedia = 0;
+            } else {
+                const rawMedia = totalMood / totalDays;
+                const roundedMedia = Math.round(rawMedia * 10) / 10;
+                media[weather].moodMedia = roundedMedia;
+            }
+        };
+
+        const result = {};
+
+        for (const weather in media) {
+            result[weather] = media[weather].moodMedia;
+        };
+
+        res.send(result);
+    } catch (error) {
+        console.log("Error getting mood media by weather:\n", error);
+        handleHttpError(res, { message: "Error getting mood media by weather" }, 500);
+    }
+};
+
 // Obtención de las 5 actividades más realizadas en los últimos 30 días
 const getTop5Activities = async (req, res) => {
     try {
@@ -638,6 +689,7 @@ module.exports = {
     updatePost,
     getWeekdaysMoodMedia,
     getSleepHoursMoodMedia,
+    getWeatherMoodMedia,
     getTop5Activities,
     getBestActivity,
     getMostActiveDay,
