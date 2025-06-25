@@ -13,7 +13,12 @@ const swaggerSpecs = require("./docs/swagger");
 const app = express();
 
 // Requirements
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000", "http://localhost:3001",
+            "https://moody-writer.vercel.app/"
+    ],
+    credentials: true
+}));
 app.use(express.json());
 app.use("/api", require("./routes")); //goes to routes/index by default
 app.use("/api-docs",
