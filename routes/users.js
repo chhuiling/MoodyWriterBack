@@ -145,22 +145,22 @@ router.get("/all", getAllUsers )
 
 /**
  * @swagger
- * /users/send-password-reset-email/{id}:
+ * /users/send-password-reset-email/{email}:
  *   get:
  *     summary: Send password reset email to user
  *     tags: [Users]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: email
  *         required: true
  *         schema:
  *           type: string
- *         description: User ID
+ *         description: User email
  *     responses:
  *       200:
  *         description: Password reset email sent
  */
-router.get("/send-password-reset-email/:id", sendPasswordResetEmail);
+router.get("/send-password-reset-email/:email", sendPasswordResetEmail);
 
 /**
  * @swagger

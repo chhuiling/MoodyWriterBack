@@ -118,8 +118,8 @@ const getAllUsers = async (req, res) => {
 
 const sendPasswordResetEmail = async (req, res) => {
   try {
-    const userId = req.params.id
-    const user = await usersModel.findById(userId)
+    const email = req.params.email
+    const user = await usersModel.findOne({email: email})
     if (!user) {
       return handleHttpError(res, {message: "User ID not found."}, 404)
     }

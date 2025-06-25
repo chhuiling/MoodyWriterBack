@@ -3,6 +3,7 @@ const app = require("../app");
 
 let token = "";
 let userId = "";
+let userEmail = ""
 let postId = "";
 
 describe("Users API", () => {
@@ -20,6 +21,7 @@ describe("Users API", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.user.email).toBe("jestuser@example.com");
     userId = res.body.user._id;
+    userEmail = res.body.user.email
   });
 
   it("should login the user", async () => {
@@ -66,7 +68,7 @@ describe("Users API", () => {
 
   it("should send password reset email", async () => {
     const res = await request(app)
-      .get(`/api/users/send-password-reset-email/${userId}`);
+      .get(`/api/users/send-password-reset-email/${userEmail}`);
     expect([200, 500]).toContain(res.statusCode);
   });
 

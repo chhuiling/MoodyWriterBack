@@ -95,4 +95,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3OGQ4O
   "surname": "XXX"}
 
 ###
-GET http://localhost:3000/api/users/send-password-reset-email/67f434753b4bc9f51c66047e
+GET http://localhost:3000/api/users/send-password-reset-email/chenalicen@gmail.com
