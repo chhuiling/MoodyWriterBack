@@ -35,7 +35,7 @@ npm run test
 
 👤 **Ángel González, Óscar Jia, Huiling Chen**
 
-* Github: [@Angelliberto, @Jiaks95, @chhuiling](https://github.com/Angelliberto, https://github.com/Jiaks95, https://github.com/chhuiling)
+* Github: @Angelliberto https://github.com/Angelliberto, @Jiaks95 https://github.com/Jiaks95, @chhuiling https://github.com/chhuiling
 
 ## Show your support
 
