@@ -152,17 +152,14 @@ const checkPasswordResetToken = async (req, res) => {
         if (!token) {
             return handleHttpError(res, { message: "Token is required to check password reset" }, 400);
         }
-
         const user = await usersModel.findOne({
             resetPasswordToken: token,
             resetPasswordTokenExpiration: { $gt: Date.now() }
         });
-
         if (!user) {
             console.warn("No valid user found with provided token");
             return handleHttpError(res, { message: "Invalid or expired password reset token" }, 404);
         }
-
         res.send({ message: "Valid password reset token" });
     } catch (error) {
         console.error("Error checking password reset token:\n", error);
